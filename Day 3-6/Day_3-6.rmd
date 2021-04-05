@@ -1,0 +1,92 @@
+---
+title: "Day_3-6 Heart failure Data"
+author: "Divyosmi Goswami"
+date: "4/5/2021"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Welcome
+
+**Hello Dear friends**
+I welcome you to this Eda Notebook. This explores the heart faliure clinical data records dataset. it is gonna be fun. i hope you will enjoy using this notebook. this notebook is dedicated to my day 3-4 of my 100 days of code.
+
+## Load Libraries
+I will only need tidyverse for this time. Guess what I wil also need corrplot. 
+
+```{r}
+library(tidyverse)
+library(corrplot) 
+library()
+```
+
+## Data exploration
+
+Let us dig up the data and explore it. Oh and yes 1 ***good news*** it is a totally cleaned data. Data set link (link)[https://archive.ics.uci.edu/ml/machine-learning-databases/00519/heart_failure_clinical_records_dataset.csv]
+
+
+
+```{r}
+x <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/00519/heart_failure_clinical_records_dataset.csv"))
+x
+```
+```{r}
+dim(x)
+```
+```{r}
+summary(x)
+```
+```{r}
+nrow(x)
+```
+```{r}
+colnames(x)
+```
+```{r}
+str(x)
+```
+## visualization
+It is day 4 and I still have modelling to do. Hope to finish soon. Feel like writing hello world and telling see i did hello world. fun fact i never wrote hello world as the first program i remember writing 2+2 in python intepreter.
+```{r}
+vizCol = function (x){
+    c = 1
+    for(i in x){
+    if(length(unique(i)) == 2){
+        pie(table(i),main=colnames(x)[c])
+    }
+    else{
+        hist(i,main= colnames(x)[c],xlab= colnames(x)[c])
+    }
+        c = c+1
+    } 
+}
+vizCol(x)
+```
+```{r}
+cor(x, method = c("pearson"))
+corrplot(cor(x, method = c("pearson")))
+cor(x, method = c("kendall"))
+corrplot(cor(x, method = c("kendall")))
+cor(x, method = c("spearman"))
+corrplot(cor(x, method = c("spearman")))
+```
+I love experimenting and so does this interact function had thought about creating a better thing but vizCol already did that for me so it was interact-ive experiment time.
+
+```{r}
+interact = function (x){
+    for(i in x){
+        for(j in x){
+            plot(i,j)
+        }
+    } 
+}
+interact(x)
+```
+#### Thank you for using.
+
